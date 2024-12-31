@@ -1,0 +1,40 @@
+token: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+config:
+  suggestion:
+    add:
+      suggestion_channel_id: "1322205879281389620"
+      role_id_with_permissions_to_write_in_suggestion_channel: "1322571610426834954"
+      emoji_check: "<:check:1322933767215517706>"
+      emoji_no_check: "<:no_check:1322933782759608420>"
+      prefix: "!suggestion"
+      embed_color: "#eb5b44"
+      title: "<:zelda_sword:1323003596219879444>  **NEW SUGGESTION**"
+      description: "has created a suggestion."
+      head_field: "**Suggestion:**"
+      footer: "new suggestion"
+    change_state:
+      role_id_with_permissions_to_change_suggestion_state: "1322571610426834954"
+      channel_id_to_set_change_state: "1322525455269625916"
+      channels:
+        - "1322205879281389620"
+        - "1322525455269625916"
+      states:
+        accepted:
+          emoji: "✅"
+          title: "<:check:1322933767215517706>  **SUGGESTION ACCEPTED**"
+          description: "suggestion has been accepted"
+          footer: "new change • suggestion changed by"
+          color: "#c4ff7d"
+        denied:
+          emoji: "⛔"
+          title: "<:no_check:1322933782759608420>  **SUGGESTION DENIED**"
+          description: "suggestion has been denied"
+          footer: "new change • suggestion changed by"
+          color: "#919191"
+        implemented:
+          emoji: "🍄"
+          title: "<:mushroom:1322886720051482624>  **SUGGESTION IMPLEMENTED**"
+          description: "suggestion has been implemented"
+          footer: "new change • suggestion changed by"
+          color: "#eb5b44"
