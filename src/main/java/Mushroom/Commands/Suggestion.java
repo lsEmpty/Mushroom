@@ -37,7 +37,10 @@ public class Suggestion extends ListenerAdapter {
             embed.setColor(Color.decode(customConfig.getSg_embed_color()));
             embed.setTitle(customConfig.getSg_title());
             embed.setDescription("-# <@"+event.getMember().getId()+"> "+customConfig.getSg_description());
-
+            if (message_complete.substring(message[0].length() + 1).length() >= 1024) {
+                event.getMessage().delete().queue();
+                return;
+            };
             embed.setThumbnail(event.getMember().getEffectiveAvatarUrl());
             embed.addField(customConfig.getSg_head_field(), message_complete.substring(message[0].length() + 1) , false);
 

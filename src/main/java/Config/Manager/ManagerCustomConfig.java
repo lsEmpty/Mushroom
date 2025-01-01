@@ -13,6 +13,14 @@ public class ManagerCustomConfig {
     private String token;
     private String server_id;
 
+    // Welcome Embed Content
+    private String wec_channel_id;
+    private String wec_title;
+    private String wec_content;
+    private String wec_thumbnail;
+    private String wec_image;
+    private String wec_color;
+
     // Bot State
     private List<BotState> bt_states;
     private int bt_elapsed_time;
@@ -46,6 +54,7 @@ public class ManagerCustomConfig {
         server_id = (String) customConfig.get("server_id");
         getSuggestionConfig();
         getBotStates();
+        getWelcomeEmbedContent();
     }
 
     private void getSuggestionConfig(){
@@ -102,6 +111,29 @@ public class ManagerCustomConfig {
             }
         }
         if (customConfig.get("config.status.elapsed_time") instanceof Integer elapsed_time) bt_elapsed_time = elapsed_time;
+    }
+
+    private void getWelcomeEmbedContent(){
+        wec_content = "";
+        wec_channel_id = (String) customConfig.get("config.welcome.channel_id");
+        wec_title = (String) customConfig.get("config.welcome.title");
+        wec_thumbnail = (String) customConfig.get("config.welcome.thumbnail");
+        wec_image = (String) customConfig.get("config.welcome.image");
+        wec_color = (String) customConfig.get("config.welcome.color");
+        Object content_object = customConfig.get("config.welcome.content");
+        if (content_object instanceof List<?> content_list){
+            boolean aux = false;
+            for (Object content : content_list){
+                if (content instanceof String content_to_set){
+                    if (!aux){
+                        wec_content = wec_content.concat(content_to_set);
+                    }else{
+                        wec_content = wec_content.concat("\n"+content_to_set);
+                    }
+                    aux = true;
+                }
+            }
+        }
     }
 
     public String getToken() {
@@ -182,5 +214,29 @@ public class ManagerCustomConfig {
 
     public String getServer_id() {
         return server_id;
+    }
+
+    public String getWec_channel_id() {
+        return wec_channel_id;
+    }
+
+    public String getWec_title() {
+        return wec_title;
+    }
+
+    public String getWec_content() {
+        return wec_content;
+    }
+
+    public String getWec_thumbnail() {
+        return wec_thumbnail;
+    }
+
+    public String getWec_image() {
+        return wec_image;
+    }
+
+    public String getWec_color() {
+        return wec_color;
     }
 }

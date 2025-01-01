@@ -2,6 +2,22 @@ token: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 server_id: "1322191259997048845"
 
 config:
+  welcome:
+    channel_id: "1322202447883669617"
+    title: null
+    content:
+      - "### ¡%user% Welcome to Mushroom server!"
+      - ""
+      - "We hope you have a good experience and meet"
+      - "meet new people here."
+      - ""
+      - "Don't **forget** read the <#1322201895862931558> to avoid"
+      - "being banned."
+      - ""
+      - "-# user invited by %invited_by_id% ・ member number %member_number%"
+    thumbnail: "%user_thumbnail%"
+    image: "https://cdn.discordapp.com/attachments/1322898427486670962/1322930998887055482/welcome_server.png?ex=67769f81&is=67754e01&hm=49c4b8a4c65e0ef119136b22b0b117e456e0bfb164e4ba5103e045b676ca1899&"
+    color: "#eb5b44"
   status:
     elapsed_time: 10
     states:
