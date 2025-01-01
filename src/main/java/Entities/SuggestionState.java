@@ -1,16 +1,16 @@
 package Entities;
 
-public class State {
+public class SuggestionState {
     private String emoji;
     private String title;
     private String description;
     private String footer;
     private String color;
 
-    public State() {
+    public SuggestionState() {
     }
 
-    public State(String emoji, String title, String description, String footer, String color) {
+    public SuggestionState(String emoji, String title, String description, String footer, String color) {
         this.emoji = emoji;
         this.title = title;
         this.description = description;

@@ -1,7 +1,8 @@
 package Config.Manager;
 
 import Config.CustomConfig;
-import Entities.State;
+import Entities.BotState;
+import Entities.SuggestionState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,11 @@ import java.util.Map;
 public class ManagerCustomConfig {
     private final CustomConfig customConfig;
     private String token;
+    private String server_id;
+
+    // Bot State
+    private List<BotState> bt_states;
+    private int bt_elapsed_time;
 
     // Suggestions Config
     private String sg_suggestion_channel_id;
@@ -25,9 +31,9 @@ public class ManagerCustomConfig {
     private String sg_role_id_with_permissions_to_change_suggestion_state;
     private String sg_channel_id_to_set_change_state;
     private List<String> sg_channels_to_change_state;
-    private State sg_accepted;
-    private State sg_denied;
-    private State sg_implemented;
+    private SuggestionState sg_accepted;
+    private SuggestionState sg_denied;
+    private SuggestionState sg_implemented;
 
 
     public ManagerCustomConfig() {
@@ -37,7 +43,9 @@ public class ManagerCustomConfig {
 
     private void getAllConfiguration(){
         token = (String) customConfig.get("token");
+        server_id = (String) customConfig.get("server_id");
         getSuggestionConfig();
+        getBotStates();
     }
 
     private void getSuggestionConfig(){
@@ -67,19 +75,33 @@ public class ManagerCustomConfig {
         String description = (String) customConfig.get("config.suggestion.change_state.states.accepted.description");;
         String footer = (String) customConfig.get("config.suggestion.change_state.states.accepted.footer");;
         String color = (String) customConfig.get("config.suggestion.change_state.states.accepted.color");;
-        sg_accepted = new State(emoji, title, description, footer, color);
+        sg_accepted = new SuggestionState(emoji, title, description, footer, color);
         emoji = (String) customConfig.get("config.suggestion.change_state.states.denied.emoji");
         title = (String) customConfig.get("config.suggestion.change_state.states.denied.title");;
         description = (String) customConfig.get("config.suggestion.change_state.states.denied.description");;
         footer = (String) customConfig.get("config.suggestion.change_state.states.denied.footer");;
         color = (String) customConfig.get("config.suggestion.change_state.states.denied.color");;
-        sg_denied = new State(emoji, title, description, footer, color);
+        sg_denied = new SuggestionState(emoji, title, description, footer, color);
         emoji = (String) customConfig.get("config.suggestion.change_state.states.implemented.emoji");
         title = (String) customConfig.get("config.suggestion.change_state.states.implemented.title");;
         description = (String) customConfig.get("config.suggestion.change_state.states.implemented.description");;
         footer = (String) customConfig.get("config.suggestion.change_state.states.implemented.footer");;
         color = (String) customConfig.get("config.suggestion.change_state.states.implemented.color");;
-        sg_implemented = new State(emoji, title, description, footer, color);
+        sg_implemented = new SuggestionState(emoji, title, description, footer, color);
+    }
+
+    private void getBotStates(){
+        bt_states = new ArrayList<>();
+        if (customConfig.get("config.status.states") instanceof List<?> list_states){
+            for (Object object_state : list_states){
+                if (object_state instanceof Map<?,?> map_state){
+                    String bot_state = (String) map_state.get("state");
+                    String type = (String) map_state.get("type");
+                    bt_states.add(new BotState(bot_state, type));
+                }
+            }
+        }
+        if (customConfig.get("config.status.elapsed_time") instanceof Integer elapsed_time) bt_elapsed_time = elapsed_time;
     }
 
     public String getToken() {
@@ -138,15 +160,27 @@ public class ManagerCustomConfig {
         return sg_channels_to_change_state;
     }
 
-    public State getSg_accepted() {
+    public SuggestionState getSg_accepted() {
         return sg_accepted;
     }
 
-    public State getSg_denied() {
+    public SuggestionState getSg_denied() {
         return sg_denied;
     }
 
-    public State getSg_implemented() {
+    public SuggestionState getSg_implemented() {
         return sg_implemented;
+    }
+
+    public List<BotState> getBt_states() {
+        return bt_states;
+    }
+
+    public int getBt_elapsed_time() {
+        return bt_elapsed_time;
+    }
+
+    public String getServer_id() {
+        return server_id;
     }
 }

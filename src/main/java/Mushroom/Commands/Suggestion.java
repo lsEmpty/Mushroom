@@ -1,6 +1,6 @@
 package Mushroom.Commands;
 
-import Entities.State;
+import Entities.SuggestionState;
 import Mushroom.Service.Suggestion.SuggestionEmbeds;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
@@ -13,8 +13,6 @@ import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import static Mushroom.MushroomMain.customConfig;
@@ -84,23 +82,23 @@ public class Suggestion extends ListenerAdapter {
                 String description = "";
                 Color embed_color = Color.BLACK;
                 String footer = "";
-                State state = null;
+                SuggestionState suggestionState = null;
                 boolean isEmoji = false;
                 if (emoji.equals(Emoji.fromUnicode(customConfig.getSg_accepted().getEmoji()))){
-                    state = customConfig.getSg_accepted();
+                    suggestionState = customConfig.getSg_accepted();
                     isEmoji = true;
                 } else if (emoji.equals(Emoji.fromUnicode(customConfig.getSg_denied().getEmoji()))) {
-                    state = customConfig.getSg_denied();
+                    suggestionState = customConfig.getSg_denied();
                     isEmoji = true;
                 } else if (emoji.equals(Emoji.fromUnicode(customConfig.getSg_implemented().getEmoji()))) {
-                    state = customConfig.getSg_implemented();
+                    suggestionState = customConfig.getSg_implemented();
                     isEmoji = true;
                 }
                 if (isEmoji){
-                    title = state.getTitle();
-                    description = "-# %user% " + state.getDescription();
-                    embed_color = Color.decode(state.getColor());
-                    footer = state.getFooter();
+                    title = suggestionState.getTitle();
+                    description = "-# %user% " + suggestionState.getDescription();
+                    embed_color = Color.decode(suggestionState.getColor());
+                    footer = suggestionState.getFooter();
                     SuggestionEmbeds.suggestionChangeState(
                             guild,
                             message_embed,

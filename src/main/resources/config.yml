@@ -1,6 +1,16 @@
 token: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+server_id: "1322191259997048845"
 
 config:
+  status:
+    elapsed_time: 10
+    states:
+      - state: "Developed by lsEmpty"
+        type: "none"
+      - state: "%users% users 👀"
+        type: "%watching%"
+      - state: "Minecraft"
+        type: "%playing%"
   suggestion:
     add:
       suggestion_channel_id: "1322205879281389620"
