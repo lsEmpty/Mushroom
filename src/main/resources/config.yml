@@ -2,6 +2,23 @@ token: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 server_id: "1322191259997048845"
 
 config:
+  verification:
+    role_id_to_use_verification_command: "1322194832520646696"
+    prefix: "!verification"
+    title: null
+    content:
+      - "### Mushroom Verification"
+      - "**Hello  <:hello:1324141222079631411>**,"
+      - "this channel is to verify if you are real"
+      - "press this button to verify yourself"
+      - ""
+      - "-# Don't forget read the rules to avoid being banned"
+    thumbnail: null
+    image: null
+    color: "#eb5b44"
+    text_button: "✅ Verify your account"
+    verify_message: "You have verified successfully yourself ✅"
+    role_id_to_add: "1322193727220875337"
   welcome:
     channel_id: "1322202447883669617"
     title: null
@@ -9,7 +26,7 @@ config:
       - "### ¡%user% Welcome to Mushroom server!"
       - ""
       - "We hope you have a good experience and meet"
-      - "meet new people here."
+      - "new people here."
       - ""
       - "Don't **forget** read the <#1322201895862931558> to avoid"
       - "being banned."

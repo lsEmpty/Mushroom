@@ -1,12 +1,13 @@
 package Mushroom.Listeners;
 
-import Mushroom.Service.JoinServer.WelcomeEmbed;
+import Mushroom.Service.JoinServer.EmbedToManipulate;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Invite;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 import static Mushroom.MushroomMain.customConfig;
@@ -22,13 +23,14 @@ public class EntryOnServerListener extends ListenerAdapter {
             try {
                 invite = inviteTracker.findUsedInvite(event.getGuild()).get();
                 String content = getContent(event, user_id, invite);
-                WelcomeEmbed.set(event.getGuild().getTextChannelById(customConfig.getWec_channel_id()),
+                EmbedBuilder embed = EmbedToManipulate.set(
                         customConfig.getWec_title(),
                         content,
                         customConfig.getWec_thumbnail(),
                         customConfig.getWec_image(),
                         event.getMember().getEffectiveAvatarUrl(),
                         customConfig.getWec_color());
+                Objects.requireNonNull(event.getGuild().getTextChannelById(customConfig.getWec_channel_id())).sendMessageEmbeds(embed.build()).queue();
                 inviteTracker.updateInvites(event.getGuild());
                 invite.getUses();
             } catch (InterruptedException | ExecutionException e) {
@@ -46,7 +48,8 @@ public class EntryOnServerListener extends ListenerAdapter {
                     .replace("%invited_by_id%", "<@"+invite.getInviter().getId()+">")
                     .replace("%invited_by_name%", invite.getInviter().getName());
         }else{
-            content = content.replace("%invited_by%", "unknown");
+            content = content.replace("%invited_by_id%", "unknown")
+                    .replace("%invited_by_name%", "unknown");
         }
         return content;
     }

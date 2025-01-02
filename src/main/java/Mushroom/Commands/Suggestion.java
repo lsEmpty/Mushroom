@@ -112,14 +112,7 @@ public class Suggestion extends ListenerAdapter {
                             footer,
                             embed_color);
                     event.getChannel().deleteMessageById(event.getMessageId()).queue();
-                    event.getUser().openPrivateChannel().queue(privateChannel -> {
-                        privateChannel.sendMessage("Has changed a suggestion successfully ✅").queue();
-                    });
                 }
-            }, throwable -> {
-                event.getUser().openPrivateChannel().queue(privateChannel -> {
-                    privateChannel.sendMessage("Has occurred a error unexpected, could not change the status of the suggestion ⛔").queue();
-                });
             });
         }
     }

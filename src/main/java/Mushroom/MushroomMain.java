@@ -2,8 +2,10 @@ package Mushroom;
 
 import Config.Manager.ManagerCustomConfig;
 import Mushroom.Commands.Suggestion;
+import Mushroom.Commands.Verification;
 import Mushroom.Listeners.EntryOnServerListener;
 import Mushroom.Listeners.GuildReady;
+import Mushroom.Listeners.VerificationButtonListener;
 import Mushroom.Service.JoinServer.InviteTracker;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -21,12 +23,15 @@ public class MushroomMain extends ListenerAdapter {
         String token = customConfig.getToken();
         api = JDABuilder.createLight(token, GatewayIntent.GUILD_MESSAGES,
                 GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS,
-                GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_INVITES
+                GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_INVITES,
+                GatewayIntent.DIRECT_MESSAGES
         ).build();
         api.getPresence().setStatus(OnlineStatus.IDLE);
         //Listeners
         api.addEventListener(new Suggestion());
         api.addEventListener(new EntryOnServerListener());
+        api.addEventListener(new Verification());
+        api.addEventListener(new VerificationButtonListener());
         api.addEventListener(new GuildReady());
     }
 }

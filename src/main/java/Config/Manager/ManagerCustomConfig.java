@@ -13,6 +13,18 @@ public class ManagerCustomConfig {
     private String token;
     private String server_id;
 
+    // Verification
+    private String vf_title;
+    private String vf_content;
+    private String vf_thumbnail;
+    private String vf_image;
+    private String vf_color;
+    private String vf_text_button;
+    private String vf_role_to_add;
+    private String vf_verify_message;
+    private String vf_prefix;
+    private String vf_role_id_to_use_verification_command;
+
     // Welcome Embed Content
     private String wec_channel_id;
     private String wec_title;
@@ -55,6 +67,7 @@ public class ManagerCustomConfig {
         getSuggestionConfig();
         getBotStates();
         getWelcomeEmbedContent();
+        getVerificationContent();
     }
 
     private void getSuggestionConfig(){
@@ -121,19 +134,40 @@ public class ManagerCustomConfig {
         wec_image = (String) customConfig.get("config.welcome.image");
         wec_color = (String) customConfig.get("config.welcome.color");
         Object content_object = customConfig.get("config.welcome.content");
+        wec_content = joinStrings(content_object);
+    }
+
+    private void getVerificationContent(){
+        vf_title = (String) customConfig.get("config.verification.title");
+        vf_color = (String) customConfig.get("config.verification.color");
+        vf_thumbnail = (String) customConfig.get("config.verification.thumbnail");
+        vf_image = (String) customConfig.get("config.verification.image");
+        vf_text_button = (String) customConfig.get("config.verification.text_button");
+        vf_role_to_add = (String) customConfig.get("config.verification.role_id_to_add");
+        vf_verify_message = (String) customConfig.get("config.verification.verify_message");
+        vf_prefix = (String) customConfig.get("config.verification.prefix");
+        vf_role_id_to_use_verification_command = (String) customConfig.get("config.verification.role_id_to_use_verification_command");
+        Object content_object = customConfig.get("config.verification.content");
+        vf_content = joinStrings(content_object);
+
+    }
+
+    private String joinStrings(Object content_object){
+        String object_to_return = "";
         if (content_object instanceof List<?> content_list){
             boolean aux = false;
             for (Object content : content_list){
                 if (content instanceof String content_to_set){
                     if (!aux){
-                        wec_content = wec_content.concat(content_to_set);
+                        object_to_return = object_to_return.concat(content_to_set);
                     }else{
-                        wec_content = wec_content.concat("\n"+content_to_set);
+                        object_to_return = object_to_return.concat("\n"+content_to_set);
                     }
                     aux = true;
                 }
             }
         }
+        return object_to_return;
     }
 
     public String getToken() {
@@ -238,5 +272,45 @@ public class ManagerCustomConfig {
 
     public String getWec_color() {
         return wec_color;
+    }
+
+    public String getVf_title() {
+        return vf_title;
+    }
+
+    public String getVf_content() {
+        return vf_content;
+    }
+
+    public String getVf_thumbnail() {
+        return vf_thumbnail;
+    }
+
+    public String getVf_image() {
+        return vf_image;
+    }
+
+    public String getVf_color() {
+        return vf_color;
+    }
+
+    public String getVf_text_button() {
+        return vf_text_button;
+    }
+
+    public String getVf_role_to_add() {
+        return vf_role_to_add;
+    }
+
+    public String getVf_verify_message() {
+        return vf_verify_message;
+    }
+
+    public String getVf_prefix() {
+        return vf_prefix;
+    }
+
+    public String getVf_role_id_to_use_verification_command() {
+        return vf_role_id_to_use_verification_command;
     }
 }
