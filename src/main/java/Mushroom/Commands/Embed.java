@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +28,7 @@ public class Embed extends ListenerAdapter {
             embedState = EmbedState.TITLE;
             embedEntity = new EmbedEntity();
             embedEntity.setUser_id(event.getMember().getId());
+            embedEntity.setChannel_id(event.getChannel().getId());
             setScheduledExecutor(event.getChannel().asTextChannel());
             event.getChannel().sendMessage("!embed was activated, follow the steps to complete creation ✅").queue();
             event.getChannel().sendMessage("Write !no if you don't need a title.\nWrite the title if you need it.").queue();
@@ -37,6 +39,7 @@ public class Embed extends ListenerAdapter {
         }
         if (embedState == EmbedState.INACTIVE) return;
         if (!embedEntity.getUser_id().equals(event.getMember().getId())) return;
+        if (!embedEntity.getChannel_id().equals(event.getChannel().getId())) return;
 
         getEmbedInformation(event, message);
     }
@@ -97,7 +100,7 @@ public class Embed extends ListenerAdapter {
                 embedEntity.setImage(message);
                 event.getChannel().sendMessage("Image set correctly ✅").queue();
             }
-            event.getChannel().sendMessage("Write !no if you don't need the footer.\nWrite the url if you need it.").queue();
+            event.getChannel().sendMessage("Write !no if you don't need the footer.\nWrite the footer if you need it.").queue();
             embedState = EmbedState.FOOTER;
         } else if (embedState == EmbedState.FOOTER){
             if (message.equals("!no")){

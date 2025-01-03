@@ -9,6 +9,8 @@ public class EmbedEntity {
     private String footer;
     private String footer_image;
     private String color;
+
+    private String channel_id;
     public EmbedEntity() {
     }
 
@@ -74,5 +76,13 @@ public class EmbedEntity {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    public String getChannel_id() {
+        return channel_id;
+    }
+
+    public void setChannel_id(String channel_id) {
+        this.channel_id = channel_id;
     }
 }
