@@ -55,6 +55,9 @@ public class ManagerCustomConfig {
     private SuggestionState sg_denied;
     private SuggestionState sg_implemented;
 
+    // Create Embed
+    private String ecb_role_id_permissions;
+
 
     public ManagerCustomConfig() {
         customConfig = new CustomConfig("config.yml", "resources");
@@ -68,6 +71,7 @@ public class ManagerCustomConfig {
         getBotStates();
         getWelcomeEmbedContent();
         getVerificationContent();
+        getCreateEmbed();
     }
 
     private void getSuggestionConfig(){
@@ -135,6 +139,10 @@ public class ManagerCustomConfig {
         wec_color = (String) customConfig.get("config.welcome.color");
         Object content_object = customConfig.get("config.welcome.content");
         wec_content = joinStrings(content_object);
+    }
+
+    private void getCreateEmbed(){
+        ecb_role_id_permissions = (String) customConfig.get("config.embed.role_id_permissions");
     }
 
     private void getVerificationContent(){
@@ -312,5 +320,9 @@ public class ManagerCustomConfig {
 
     public String getVf_role_id_to_use_verification_command() {
         return vf_role_id_to_use_verification_command;
+    }
+
+    public String getEcb_role_id_permissions() {
+        return ecb_role_id_permissions;
     }
 }

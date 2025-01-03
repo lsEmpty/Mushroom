@@ -81,3 +81,5 @@ config:
           description: "suggestion has been implemented"
           footer: "new change • suggestion changed by"
           color: "#eb5b44"
+  embed:
+    role_id_permissions: "1322571610426834954"
