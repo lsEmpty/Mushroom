@@ -4,6 +4,7 @@ import Config.CustomConfig;
 import Entities.BotState;
 import Entities.SuggestionState;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.Map;
 public class ManagerCustomConfig {
     private final CustomConfig customConfig;
     private String token;
+    private String env_token_name;
     private String server_id;
 
     // Verification
@@ -60,12 +62,17 @@ public class ManagerCustomConfig {
 
 
     public ManagerCustomConfig() {
-        customConfig = new CustomConfig("config.yml", "resources");
+        customConfig = new CustomConfig("config.yml", ".");
+        customConfig.reloadConfig();
+        System.out.println(customConfig.getAll());
         getAllConfiguration();
     }
 
     private void getAllConfiguration(){
-        token = (String) customConfig.get("token");
+        env_token_name = (String) customConfig.get("env_token_name");
+        if (env_token_name != null){
+            token = System.getenv(env_token_name);
+        }
         server_id = (String) customConfig.get("server_id");
         getSuggestionConfig();
         getBotStates();
@@ -325,4 +332,6 @@ public class ManagerCustomConfig {
     public String getEcb_role_id_permissions() {
         return ecb_role_id_permissions;
     }
+
+    public String getEnv_token_name() { return env_token_name; }
 }

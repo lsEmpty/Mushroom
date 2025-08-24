@@ -18,13 +18,14 @@ public class Embed extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         if (Objects.requireNonNull(event.getMember()).getUser().isBot()) return;
+        if (!event.getMessage().getContentRaw().equals("!embed")) return;
         if (!Objects.requireNonNull(event.getMember()).getRoles().contains(event.getGuild().getRoleById(customConfig.getEcb_role_id_permissions()))){
             event.getMessage().delete().queue();
             return;
         }
         String message = event.getMessage().getContentRaw();
         if (setCancel(event, message)) return;
-        if (message.equals("!embed") && embedState == EmbedState.INACTIVE){
+        if (embedState == EmbedState.INACTIVE){
             embedState = EmbedState.TITLE;
             embedEntity = new EmbedEntity();
             embedEntity.setUser_id(event.getMember().getId());

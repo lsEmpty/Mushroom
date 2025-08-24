@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="Mushroom:jar">
-    <output-path>$USER_HOME$/OneDrive/Escritorio/Bots</output-path>
+    <output-path>$USER_HOME$/Downloads</output-path>
     <root id="archive" name="Mushroom.jar">
       <element id="module-output" name="Mushroom" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.25.5/protobuf-java-3.25.5.jar" path-in-jar="/" />
